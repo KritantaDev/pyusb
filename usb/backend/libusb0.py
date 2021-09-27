@@ -34,7 +34,7 @@ import os
 import usb.backend
 import usb.util
 import sys
-from usb.core import USBError, USBTimeoutError
+from usb.core import *
 from usb._debug import methodtrace
 import usb._interop as _interop
 import logging
