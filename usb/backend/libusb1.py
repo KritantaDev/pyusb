@@ -37,7 +37,7 @@ import usb._interop as _interop
 import usb._objfinalizer as _objfinalizer
 import errno
 import math
-from usb.core import USBError, USBTimeoutError
+from usb.core import *
 import usb.libloader
 
 __author__ = 'Wander Lairson Costa'
