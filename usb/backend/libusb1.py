@@ -28,6 +28,30 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+class USBError(IOError):
+    r"""Exception class for USB errors.
+    Backends must raise this exception when USB related errors occur.  The
+    backend specific error code is available through the 'backend_error_code'
+    member variable.
+    """
+
+    def __init__(self, strerror, error_code = None, errno = None):
+        r"""Initialize the object.
+        This initializes the USBError object. The strerror and errno are passed
+        to the parent object. The error_code parameter is attributed to the
+        backend_error_code member variable.
+        """
+
+        IOError.__init__(self, errno, strerror)
+        self.backend_error_code = error_code
+
+class USBTimeoutError(USBError):
+    r"""Exception class for connection timeout errors.
+    Backends must raise this exception when a call on a USB connection returns
+    a timeout error code.
+    """
+    pass
+
 from ctypes import *
 import usb.util
 import sys
@@ -37,7 +61,6 @@ import usb._interop as _interop
 import usb._objfinalizer as _objfinalizer
 import errno
 import math
-from usb.core import *
 import usb.libloader
 
 __author__ = 'Wander Lairson Costa'
